@@ -1,26 +1,11 @@
 {
   "name": "rideshare-viz",
-  "version": "0.1.0",
   "description": "A visualization tool for exploring rideshare data.",
-  "engines": {
-    "node": ">=10.16"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/lesliepassante/rideshare-viz"
-  },
+  "version": "0.1.0",
+  "author": "Leslie Passante <leslie.passante@gmail.com>",
   "bugs": {
     "url": "https://github.com/lesliepassante/rideshare-viz/issues"
   },
-  "scripts": {
-    "build": "webpack --config webpack.prod.js",
-    "deploy": "npm ci && npm run lint && npm test && npm run build",
-    "lint": "eslint --fix src",
-    "start": "webpack-dev-server --config webpack.dev.js",
-    "test": "tape -r @babel/register src/**/*.test.js | tap-spec"
-  },
-  "author": "Leslie Passante <leslie.passante@gmail.com>",
-  "license": "MIT",
   "dependencies": {
     "@turf/turf": "~5.1.6",
     "bootstrap": "~4.3.1",
@@ -69,5 +54,21 @@
     "webpack-dev-server": "~3.2.0",
     "webpack-merge": "~4.2.1",
     "worker-loader": "~2.0.0"
+  },
+  "engines": {
+    "node": ">=10.16"
+  },
+  "homepage": "https://github.com/lesliepassante/rideshare-viz",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lesliepassante/rideshare-viz"
+  },
+  "scripts": {
+    "build": "webpack --config webpack.prod.js",
+    "deploy": "npm ci && npm run lint && npm test && npm run build",
+    "lint": "eslint --fix src",
+    "start": "webpack-dev-server --config webpack.dev.js",
+    "test": "tape -r @babel/register src/**/*.test.js | tap-spec"
   }
 }
