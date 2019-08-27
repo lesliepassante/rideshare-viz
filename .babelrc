@@ -1,0 +1,14 @@
+{
+  "plugins": ["babel-plugin-styled-components", ["babel-plugin-webpack-alias-7", { "config": "./webpack.common.js" }]],
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "node": "10"
+        }
+      }
+    ],
+    "@babel/preset-react"
+  ]
+}
