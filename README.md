@@ -4,7 +4,7 @@ This project is a visualization tool for rideshare data. It can display live dat
 
 ## Demo
 
-Check out a live demo [here](https://lesliepassante.com/projects/rideshare-viz).
+Check out a live demo [here](https://lesliepassante.com/projects/rideshare-viz/).
 
 ## Data format
 
