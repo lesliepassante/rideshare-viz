@@ -16,7 +16,7 @@ An [example data set](https://lesliepassante.com/projects/rideshare-viz/assets/e
 
 We use [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js/api/) to render the interactive map, so Mapbox credentials are required to run this project. Your environment must contain a [Mapbox access token](https://docs.mapbox.com/help/glossary/access-token/) with **public scopes**. If desired, you can also override the default map style with a [custom style](https://docs.mapbox.com/studio-manual/reference/styles/).
 
-To supply the Mapbox access token, either populate a `.env` file in the root of this repo, as shown by `.env.example`, or set the following environment variables:
+To supply the Mapbox access token, either populate a `.env` file in the root of this repo, as shown by [.env.example](.env.example), or set the following environment variables:
 
 ```Shell
 export MAPBOX_ACCESS_TOKEN=pk.foo.bar # required
