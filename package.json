@@ -2,9 +2,15 @@
   "name": "rideshare-viz",
   "version": "0.1.0",
   "description": "A visualization tool for exploring rideshare data.",
-  "private": true,
   "engines": {
     "node": ">=10.16"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lesliepassante/rideshare-viz"
+  },
+  "bugs": {
+    "url": "https://github.com/lesliepassante/rideshare-viz/issues"
   },
   "scripts": {
     "build": "webpack --config webpack.prod.js",
