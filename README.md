@@ -52,3 +52,5 @@ After cloning this repository and configuring your environment, run the followin
 docker build --build-arg MAPBOX_ACCESS_TOKEN="$MAPBOX_ACCESS_TOKEN" --build-arg MAPBOX_STYLE="$MAPBOX_STYLE" --tag rideshare-viz . # build image
 docker run -p 8080:80 rideshare-viz # start project on localhost:8080
 ```
+
+Once the container is running, the demo is accessible on [localhost:8080](localhost:8080).
