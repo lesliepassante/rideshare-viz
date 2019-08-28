@@ -7,7 +7,10 @@
     "url": "https://github.com/lesliepassante/rideshare-viz/issues"
   },
   "dependencies": {
-    "@turf/turf": "~5.1.6",
+    "@turf/helpers": "~6.1.4",
+    "@turf/length": "~6.0.2",
+    "@turf/line-slice": "~5.1.5",
+    "@turf/line-slice-along": "~5.1.5",
     "bootstrap": "~4.3.1",
     "mapbox-gl": "~0.53.0",
     "prop-types": "~15.7.2",
