@@ -4,6 +4,7 @@ if (typeof self !== 'undefined') {
   self.onmessage = async ({ data: { filesToLoad, numFramesToCreate } }) => {
     try {
       const files = await Promise.all(filesToLoad.map(file => loadFile(file)));
+
       files.forEach((file, i, arr) => {
         const geojson = filterGeojson({ geojson: file.geojson, animated: false });
 
@@ -18,7 +19,7 @@ if (typeof self !== 'undefined') {
       self.postMessage({ success: true });
       self.close();
     } catch (err) {
-      self.postMessage({ error: err });
+      self.postMessage({ error: err.message });
       self.close();
     }
   };
@@ -30,16 +31,20 @@ function loadFile(file) {
   return new Promise((resolve, reject) => {
     reader.onerror = () => {
       reader.abort();
-      reject('Error loading file.', file);
+      reject(new Error('Error loading file.'));
     };
 
     reader.onload = () => {
       try {
         const geojson = JSON.parse(reader.result);
         const name = file.name;
-        resolve({ geojson, name });
+        if (!geojson.features) {
+          reject(new Error(`${file.name} is not a valid GeoJSON file.`));
+        } else {
+          resolve({ geojson, name });
+        }
       } catch (err) {
-        reject(`${file.name} is not a valid JSON file.`, file);
+        reject(new Error(`${file.name} is not a valid JSON file.`));
       }
     };
 
