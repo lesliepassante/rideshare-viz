@@ -4,8 +4,6 @@ This project is a visualization tool for rideshare data. It can display live dat
 
 ![Screenshot of Rideshare viz](demo/rideshare-viz-screengrab.png?raw=true)
 
-## Demo
-
 Check out a live demo [here](https://rideshare-viz.lesliepassante.com).
 
 ## Data format
@@ -55,4 +53,4 @@ docker build --build-arg MAPBOX_ACCESS_TOKEN="$MAPBOX_ACCESS_TOKEN" --build-arg 
 docker run -p 8080:80 rideshare-viz # start project on localhost:8080
 ```
 
-Once the container is running, the demo is accessible on [localhost:8080](localhost:8080).
+Once the container is running, the demo is accessible on [localhost:8080](http://localhost:8080).
