@@ -2,6 +2,8 @@
 
 This project is a visualization tool for rideshare data. It can display live data in the internal admin panel of a rideshare company, or display the results of a routing simulation. We can watch route requests appearing and being assigned, and drivers picking up and dropping off passengers.
 
+![Screenshot of Rideshare viz](demo/rideshare-viz-screengrab.png?raw=true)
+
 ## Demo
 
 Check out a live demo [here](https://rideshare-viz.lesliepassante.com).
