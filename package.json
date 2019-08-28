@@ -66,8 +66,9 @@
   },
   "scripts": {
     "build": "webpack --config webpack.prod.js",
-    "deploy": "npm ci && npm run lint && npm test && npm run build",
-    "lint": "eslint --fix src",
+    "build:ci": "npm ci && npm run lint && npm test && npm run build",
+    "lint": "eslint src",
+    "lint:fix": "eslint --fix src",
     "start": "webpack-dev-server --config webpack.dev.js",
     "test": "tape -r @babel/register src/**/*.test.js | tap-spec"
   }
