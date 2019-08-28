@@ -8,6 +8,19 @@ module.exports = merge(common, {
   mode: 'production',
   devtool: 'source-map',
   optimization: {
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name(module) {
+            const toChunk = ['mapbox-gl'];
+            const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+            return toChunk.includes(packageName) ? packageName : 'vendor';
+          }
+        }
+      }
+    },
     minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})]
   },
   plugins: [
