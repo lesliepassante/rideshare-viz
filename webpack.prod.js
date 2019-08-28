@@ -23,10 +23,12 @@ module.exports = merge(common, {
     },
     minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})]
   },
+  output: {
+    filename: '[name].[chunkhash].js'
+  },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[name].[hash].css',
-      chunkFilename: '[id].css'
+      filename: '[name].[contenthash].css'
     })
   ],
   module: {
