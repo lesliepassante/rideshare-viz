@@ -1,4 +1,7 @@
-import * as turf from '@turf/turf';
+import { lineString, point } from '@turf/helpers';
+import length from '@turf/length';
+import lineSlice from '@turf/line-slice';
+import lineSliceAlong from '@turf/line-slice-along';
 
 if (typeof self !== 'undefined') {
   self.onmessage = async ({ data: { filesToLoad, numFramesToCreate } }) => {
@@ -68,14 +71,14 @@ function createFrames({ startGeojson, endGeojson, numFramesToCreate = 0 } = {}) 
     const endRoute = endRoutes.find(endRoute => endRoute.properties.driverId === route.properties.driverId);
     if (!endRoute) return;
 
-    const routeLine = turf.lineString(route.geometry.coordinates);
-    const routeLineLength = turf.length(routeLine);
+    const routeLine = lineString(route.geometry.coordinates);
+    const routeLineLength = length(routeLine);
     if (!routeLineLength) return;
 
-    const segmentStartPoint = turf.point(route.geometry.coordinates[0]);
-    const segmentEndPoint = turf.point(endRoute.geometry.coordinates[0]);
-    const segmentRouteLine = turf.lineSlice(segmentStartPoint, segmentEndPoint, routeLine);
-    const segmentRouteLineLength = turf.length(segmentRouteLine);
+    const segmentStartPoint = point(route.geometry.coordinates[0]);
+    const segmentEndPoint = point(endRoute.geometry.coordinates[0]);
+    const segmentRouteLine = lineSlice(segmentStartPoint, segmentEndPoint, routeLine);
+    const segmentRouteLineLength = length(segmentRouteLine);
     if (!segmentRouteLineLength) return;
 
     frames.forEach((frame, i) => {
@@ -90,7 +93,7 @@ function createFrames({ startGeojson, endGeojson, numFramesToCreate = 0 } = {}) 
       );
 
       try {
-        const newRouteLine = turf.lineSliceAlong(routeLine, segmentRouteLineProgress, routeLineLength);
+        const newRouteLine = lineSliceAlong(routeLine, segmentRouteLineProgress, routeLineLength);
         newRoute.geometry.coordinates = newRouteLine.geometry.coordinates;
         newDriver.geometry.coordinates = newRouteLine.geometry.coordinates[0];
       } catch (err) {
