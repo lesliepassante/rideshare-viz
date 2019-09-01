@@ -30,7 +30,7 @@ export MAPBOX_STYLE=mapbox://styles/foo # optional; will default to mapbox://sty
 After cloning this repository and configuring your environment, run:
 
 ```Shell
-npm ci  # install dependencies
+npm install  # install dependencies
 npm start  # start development server on localhost:8080
 ```
 
@@ -51,8 +51,8 @@ This repository contains a `Dockerfile` that builds an image of the static site,
 After cloning this repository and configuring your environment, run the following commands. Note that `--build-arg MAPBOX_STYLE="$MAPBOX_STYLE"` is optional and will default to [Mapbox Light](https://www.mapbox.com/maps/light-dark/). Docker will not read the build args from a `.env` file, so they must be provided as environment variables or directly specified in the command.
 
 ```Shell
-docker build --build-arg MAPBOX_ACCESS_TOKEN="$MAPBOX_ACCESS_TOKEN" --build-arg MAPBOX_STYLE="$MAPBOX_STYLE" --tag rideshare-viz . # build image
-docker run -p 8080:80 rideshare-viz # start project on localhost:8080
+docker build --tag rideshare-viz . # build image
+docker run -d -p 8080:80 -e MAPBOX_ACCESS_TOKEN="$MAPBOX_ACCESS_TOKEN" -e MAPBOX_STYLE="$MAPBOX_STYLE" rideshare-viz # start project on localhost:8080
 ```
 
 Once the container is running, the demo is accessible on [localhost:8080](http://localhost:8080).

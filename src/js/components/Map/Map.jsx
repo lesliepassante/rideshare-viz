@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import MapLoading from './MapLoading';
@@ -27,12 +27,12 @@ const MAP_STYLES = {
   COLOR_SELECTED: '#343a40'
 };
 
-function Map({ buffered, fileGeojson, frameGeojson, loaded, selectedDriverId, selectDriver }) {
+function Map({ buffered, config = {}, fileGeojson, frameGeojson, loaded, selectedDriverId, selectDriver }) {
   const [map, setMap] = useState(null);
   const [mapLoaded, setMapLoaded] = useState(false);
   const [hoveredDriverId, setHoveredDriverId] = useState(null);
 
-  useInitializeMap({ setMap, setMapLoaded, setHoveredDriverId, selectDriver, MAP_ID, MAP_STYLES });
+  useInitializeMap({ config, setMap, setMapLoaded, setHoveredDriverId, selectDriver, MAP_ID, MAP_STYLES });
   useUpdateMapFileGeojson({ map, mapLoaded, fileGeojson, selectedDriverId, hoveredDriverId });
   useUpdateMapFrameGeojson({ map, mapLoaded, frameGeojson, selectedDriverId, hoveredDriverId });
   useUpdateMapSelectedDriver({ map, mapLoaded, selectedDriverId, hoveredDriverId });
@@ -47,6 +47,7 @@ function Map({ buffered, fileGeojson, frameGeojson, loaded, selectedDriverId, se
 
 Map.propTypes = {
   buffered: PropTypes.bool.isRequired,
+  config: PropTypes.object,
   fileGeojson: PropTypes.object,
   frameGeojson: PropTypes.object,
   loaded: PropTypes.bool.isRequired,
