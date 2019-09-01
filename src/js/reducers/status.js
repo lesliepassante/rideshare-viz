@@ -1,4 +1,5 @@
 import {
+  INITIALIZE_APP_SUCCESS,
   LOAD_FILES_REQUEST,
   LOAD_FILES_SUCCESS,
   LOAD_FILES_FAILURE,
@@ -10,6 +11,7 @@ import {
 
 const initialState = {
   buffered: false,
+  initialized: false,
   loading: false,
   loaded: false,
   error: null,
@@ -18,6 +20,15 @@ const initialState = {
 
 export default function status(state = initialState, action = {}) {
   switch (action.type) {
+    case INITIALIZE_APP_SUCCESS: {
+      return {
+        ...state,
+        ...{
+          initialized: true
+        }
+      };
+    }
+
     case LOAD_FILES_REQUEST: {
       return {
         ...state,

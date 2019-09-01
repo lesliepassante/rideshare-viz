@@ -2,6 +2,7 @@ import test from 'tape';
 import reducer from 'reducers/status';
 import createState from 'reducers/status.factory';
 import {
+  INITIALIZE_APP_SUCCESS,
   LOAD_FILES_REQUEST,
   LOAD_FILES_SUCCESS,
   LOAD_FILES_FAILURE,
@@ -10,6 +11,16 @@ import {
   STOP_SIMULATION,
   BUFFER_SIMULATION
 } from 'actions';
+
+test(`statusReducer() with action ${INITIALIZE_APP_SUCCESS}`, ({ same, end }) => {
+  const msg = 'should return correct state';
+
+  const actual = reducer(undefined, { type: INITIALIZE_APP_SUCCESS });
+  const expected = createState({ initialized: true });
+
+  same(actual, expected, msg);
+  end();
+});
 
 test('statusReducer() with no arguments', ({ same, end }) => {
   const msg = 'should return correct state';
