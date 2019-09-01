@@ -1,14 +1,14 @@
 import { useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
-import { MAPBOX_ACCESS_TOKEN, MAPBOX_STYLE } from 'utils/constants';
 
 const geojsonPlaceholder = {
   type: 'FeatureCollection',
   features: []
 };
 
-function useInitializeMap({ setMap, setMapLoaded, setHoveredDriverId, selectDriver, MAP_ID, MAP_STYLES }) {
+function useInitializeMap({ config, setMap, setMapLoaded, setHoveredDriverId, selectDriver, MAP_ID, MAP_STYLES }) {
   useEffect(() => {
+    const { MAPBOX_ACCESS_TOKEN, MAPBOX_STYLE } = config;
     const { MAP_DEFAULT_CENTER, MAP_DEFAULT_ZOOM, COLOR_ASSIGNED, COLOR_UNASSIGNED, COLOR_SELECTED } = MAP_STYLES;
     mapboxgl.accessToken = MAPBOX_ACCESS_TOKEN;
 
@@ -16,7 +16,7 @@ function useInitializeMap({ setMap, setMapLoaded, setHoveredDriverId, selectDriv
       container: MAP_ID,
       center: MAP_DEFAULT_CENTER,
       zoom: MAP_DEFAULT_ZOOM,
-      style: MAPBOX_STYLE
+      style: MAPBOX_STYLE || 'mapbox://styles/mapbox/light-v9'
     });
 
     const popup = new mapboxgl.Popup({
@@ -188,7 +188,7 @@ function useInitializeMap({ setMap, setMapLoaded, setHoveredDriverId, selectDriv
     map.on('click', 'driver-points', onClick);
 
     setMap(map);
-  }, [setMap, setMapLoaded, setHoveredDriverId, selectDriver, MAP_ID, MAP_STYLES]);
+  }, [setMap, setMapLoaded, setHoveredDriverId, selectDriver, MAP_ID, MAP_STYLES, config]);
 }
 
 export default useInitializeMap;

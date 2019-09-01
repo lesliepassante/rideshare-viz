@@ -11,6 +11,7 @@ const mapStateToProps = state => {
 
   return {
     buffered,
+    config: state.config,
     loaded,
     fileGeojson: currentFile ? currentFile.geojson : null,
     frameGeojson: currentFrame ? currentFrame.geojson : null,
