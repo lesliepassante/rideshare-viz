@@ -48,7 +48,7 @@ This will result in a `/dist` folder containing the static site, ready for publi
 
 This repository contains a `Dockerfile` that builds an image of the static site, served with `nginx`. This is in no way optimized for production use, but intended as a convenient way to preview the production site locally.
 
-After cloning this repository and configuring your environment, run the following commands. Note that `--build-arg MAPBOX_STYLE="$MAPBOX_STYLE"` is optional and will default to [Mapbox Light](https://www.mapbox.com/maps/light-dark/). Docker will not read the build args from a `.env` file, so they must be provided as environment variables or directly specified in the command.
+After cloning this repository and configuring your environment, run the following commands. Note that `-e MAPBOX_STYLE="$MAPBOX_STYLE"` is optional and will default to [Mapbox Light](https://www.mapbox.com/maps/light-dark/).
 
 ```Shell
 docker build --tag rideshare-viz . # build image
