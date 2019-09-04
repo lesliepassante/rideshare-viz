@@ -4,6 +4,28 @@ import { getBufferFiles, getUnloadedBufferFiles, getNextFramePosition } from 'se
 
 let simulationTimer;
 
+export const INITIALIZE_APP_REQUEST = 'INITIALIZE_APP_REQUEST';
+export const initializeAppRequest = () => ({
+  type: INITIALIZE_APP_REQUEST
+});
+
+export const INITIALIZE_APP_SUCCESS = 'INITIALIZE_APP_SUCCESS';
+export const initializeAppSuccess = () => ({
+  type: INITIALIZE_APP_SUCCESS
+});
+
+export const INITIALIZE_APP_FAILURE = 'INITIALIZE_APP_FAILURE';
+export const initializeAppFailure = (error = 'App could not be initialized.') => ({
+  type: INITIALIZE_APP_FAILURE,
+  error
+});
+
+export const LOAD_CONFIG_SUCCESS = 'LOAD_CONFIG_SUCCESS';
+export const loadConfigSuccess = (config = {}) => ({
+  type: LOAD_CONFIG_SUCCESS,
+  config
+});
+
 export const CHOOSE_FILES_SUCCESS = 'CHOOSE_FILES_SUCCESS';
 export const chooseFilesSuccess = (files = []) => ({
   type: CHOOSE_FILES_SUCCESS,
@@ -71,6 +93,20 @@ export const DESELECT_DRIVER = 'DESELECT_DRIVER';
 export const deselectDriver = () => ({
   type: DESELECT_DRIVER
 });
+
+export const initializeApp = () => {
+  return async dispatch => {
+    dispatch(initializeAppRequest());
+    try {
+      const response = await fetch('config.json');
+      const config = await response.json();
+      dispatch(loadConfigSuccess(config));
+      dispatch(initializeAppSuccess());
+    } catch (err) {
+      dispatch(initializeAppFailure(err.message || err.toString()));
+    }
+  };
+};
 
 export const chooseFilesAndPlaySimulation = fileList => {
   const files = [...fileList];

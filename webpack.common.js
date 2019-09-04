@@ -1,14 +1,9 @@
 const path = require('path');
-const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const GenerateJsonPlugin = require('generate-json-webpack-plugin');
 require('dotenv').config();
-
-if (!process.env.MAPBOX_ACCESS_TOKEN) {
-  console.error('Missing required environment variable MAPBOX_ACCESS_TOKEN.');
-  process.exit(1);
-}
 
 module.exports = {
   entry: {
@@ -42,9 +37,9 @@ module.exports = {
       title: 'rideshare viz',
       template: 'src/js/templates/index.html'
     }),
-    new webpack.DefinePlugin({
-      'process.env.MAPBOX_ACCESS_TOKEN': JSON.stringify(process.env.MAPBOX_ACCESS_TOKEN),
-      'process.env.MAPBOX_STYLE': JSON.stringify(process.env.MAPBOX_STYLE)
+    new GenerateJsonPlugin('config.json', {
+      MAPBOX_ACCESS_TOKEN: process.env.MAPBOX_ACCESS_TOKEN,
+      MAPBOX_STYLE: process.env.MAPBOX_STYLE
     })
   ],
   resolve: {

@@ -10,11 +10,13 @@ module.exports = merge(common, {
   optimization: {
     splitChunks: {
       chunks: 'all',
+      maxInitialRequests: Infinity,
+      minSize: 0,
       cacheGroups: {
         vendor: {
           test: /[\\/]node_modules[\\/]/,
           name(module) {
-            const toChunk = ['mapbox-gl'];
+            const toChunk = ['mapbox-gl', 'react-dom'];
             const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
             return toChunk.includes(packageName) ? packageName : 'vendor';
           }
@@ -23,10 +25,12 @@ module.exports = merge(common, {
     },
     minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})]
   },
+  output: {
+    filename: '[name].[chunkhash].js'
+  },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[name].[hash].css',
-      chunkFilename: '[id].css'
+      filename: '[name].[contenthash].css'
     })
   ],
   module: {
