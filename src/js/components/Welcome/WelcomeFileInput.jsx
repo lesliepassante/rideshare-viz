@@ -20,7 +20,7 @@ function WelcomeFileInput({ loadFiles }) {
         hidden
         aria-hidden="true"
         tabIndex="-1"
-        onInput={() => loadFiles(document.getElementById(inputID).files)}
+        onChange={() => loadFiles(document.getElementById(inputID).files)}
       />
       <StyledButton onClick={() => document.getElementById(inputID).click()}>Browse</StyledButton>
     </React.Fragment>
