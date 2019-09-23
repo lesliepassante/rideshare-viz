@@ -1,7 +1,7 @@
 {
   "name": "rideshare-viz",
   "description": "A visualization tool for exploring rideshare data.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Leslie Passante <leslie.passante@gmail.com>",
   "bugs": {
     "url": "https://github.com/lesliepassante/rideshare-viz/issues"
