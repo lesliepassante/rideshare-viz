@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Progress, Button } from 'reactstrap';
+import { Button } from 'reactstrap';
 import styled from 'styled-components';
 import { MdPause, MdPlayArrow, MdSkipNext, MdSkipPrevious } from 'react-icons/md';
+import { ProgressBar, Timestamp } from 'containers/PlaybackControls';
 
 const StyledPlaybackControls = styled.div`
   bottom: 100px;
@@ -22,14 +23,6 @@ const StyledPlaybackControls = styled.div`
   min-width: 400px;
 `;
 
-const StyledProgress = styled(Progress)`
-  width: 100%;
-
-  & .progress-bar {
-    transition-property: none;
-  }
-`;
-
 const StyledButton = styled(Button)`
   font-size: 1.4em !important;
   line-height: 1em !important;
@@ -37,17 +30,10 @@ const StyledButton = styled(Button)`
   margin-right: 1rem;
 `;
 
-const Timestamp = styled.span`
-  white-space: nowrap;
-  margin-left: 1rem;
-  font-weight: bold;
-`;
-
 function PlaybackControls({
   isSelectedDriver = false,
-  progress = 0,
+  isAtEnd = false,
   playing = false,
-  timestamp,
   onPause,
   onPlay,
   onSkipForward,
@@ -62,7 +48,7 @@ function PlaybackControls({
         </StyledButton>
       )}
       {!playing && (
-        <StyledButton onClick={progress === 100 ? onStartOver : onPlay}>
+        <StyledButton onClick={isAtEnd ? onStartOver : onPlay}>
           <MdPlayArrow />
         </StyledButton>
       )}
@@ -72,17 +58,16 @@ function PlaybackControls({
       <StyledButton onClick={onSkipForward}>
         <MdSkipNext />
       </StyledButton>
-      <StyledProgress value={progress} />
-      <Timestamp>{timestamp}</Timestamp>
+      <ProgressBar />
+      <Timestamp />
     </StyledPlaybackControls>
   );
 }
 
 PlaybackControls.propTypes = {
   isSelectedDriver: PropTypes.bool,
-  progress: PropTypes.number,
+  isAtEnd: PropTypes.bool,
   playing: PropTypes.bool,
-  timestamp: PropTypes.string,
   onPause: PropTypes.func.isRequired,
   onPlay: PropTypes.func.isRequired,
   onSkipForward: PropTypes.func.isRequired,
